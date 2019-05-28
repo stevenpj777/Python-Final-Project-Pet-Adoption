@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>New User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+      <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+      <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+      crossorigin="anonymous"></script>
+      <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+      integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+      crossorigin="anonymous"></script>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+
+      <style>
+
+      nav li !importance{
+        display: inline-block;
+        padding: 25px 0;
+        width: 150px;
+        color: white;
+        font-size: 20px;
+      }
+
+      nav li a:active !importance {
+        color: blue;
+      }
+
+      nav li a:hover !importance {
+        color: yellow;
+        border-color: white;
+        font-weight: bold;
+        line-height: .1;
+      }
+      nav {
+        margin-top: -15px;
+      }
+          .modify {
+            display: flex;
+          }
+
+          input[type=submit] {
+            width: 75%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          .steven_form {
+            margin-left: 50px;
+          }
+          .steven {
+            width: 500px;
+          }
+          .message_container {
+            margin-left: 50px;
+          }
+          .show_div {
+            border: 1px solid red;
+          }
+          img {
+            width: 600px;
+            height: 600px;
+            border-radius: 25px;
+          }
+          .container {
+            padding: 20px 10px;
+            background-color: rgb(242, 242, 242);
+            display: flex;
+            justify-content: center;
+            justify-content:space-around;
+            width: 1200px;
+
+          }
+          .display {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          font-size: 20px;
+          border: 3px solid red;
+          border-radius: 10px;
+          width: 400px;
+          }
+
+          .button {
+            display: inline-block;
+            width: 100px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            width: 150px;
+            margin-right: 5px;
+            background-color: midnightblue;
+            padding: 0px 40px;
+            display: inline-block;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+          }
+
+          .button:hover {
+            color: midnightblue;
+            background-color: white;
+            border: 1px solid midnightblue;
+          }
+      </style>
+
+
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>Adoptly</li>
+        <li>About</li>
+        <li>Animals</li>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="/destroy_session">Logout</a></li>
+      </ul>
+    </nav>
+
+
+    <div class="container">
+        <div class="display">
+            <p><b>Name: </b> {{ pet['name'] }}</p>
+            <p><b>Type: </b>{{  pet['type'] }} </p>
+            <p><b>Breed: </b>{{  pet['breed'] }}</p>
+            <p><b>Color: </b>{{  pet['color'] }}</p>
+            <p><b>Location:</b> {{ pet['location'] }}</p>
+        <div class="buttons">
+          <a class="button" href="/pets">Back</a>
+          <a class="button" href="#">Schedule Visit</a>
+        </div>
+        </div>
+            <img src="/{{pet['file_name']}}">
+    </div>
+
+  </body>
+</html>

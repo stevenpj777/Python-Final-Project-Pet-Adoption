@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add New User</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/add_pet.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+      <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+      <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+      crossorigin="anonymous"></script>
+
+  </head>
+
+  <style>
+
+    body {
+    font-family: Arial;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  .add_pet {
+    color: navy;
+  }
+  /* Navigation Bar */
+
+  nav li {
+    display: inline-block;
+    padding: 25px 0;
+    width: 150px;
+    color: white;
+    font-size: 20px;
+  }
+
+  nav li a:active {
+    color: blue;
+  }
+
+  nav li a:hover {
+    color: yellow;
+    border-color: white;
+    font-weight: bold;
+    line-height: .1;
+  }
+
+  input[type=text], select {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type=submit] {
+    width: 50%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+  .container {
+    width: 50%;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  </style>
+
+  <body>
+
+    <nav>
+        <ul>
+            <li>Adoptly</li>
+            <li>About</li>
+            <li><a href="/pets">Animals</a></li>
+            <li>Events</li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="/destroy_session">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid" style="min-height:100%">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        {{message}}
+          </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+
+
+    <div class="container">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="fname">Pet Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="">
+
+            <label for="lname">Pet Type (Dog, Cat, etc)</label>
+            <input type="text" id="lname" name="pettype" placeholder="">
+
+            <label for="lname">Breed</label>
+            <input type="text" id="email" name="breed" placeholder="">
+
+            <label for="lname">Color</label>
+            <input type="text" id="email" name="color" placeholder="">
+
+            <label for="lname">Location</label>
+            <label for="lname">Location</label>
+                <!-- <input type="text" id="email" name="location" placeholder="Your email.."> -->
+                <input type="text" id="default" name="location" list="cities" placeholder="Seattle">
+                <datalist id="cities">
+                  <option value="Seattle">
+                  <option value="NYC">
+                  <option value="Hamburg">
+                  <option value="Berlin">
+                  <option value="Paris">
+                  <option value="Amsterdam">
+                  <option value="Palo Alot">
+                  <option value="Los Angeles">
+                  <option value="Chicago">
+                  <option value="Copenhagen">
+                  <option value="Oslo">
+                  <option value="Prague">
+                </datalist>
+
+
+            <strong>Add Picture</strong><br>
+            <input id="file-picker" type="file" name="file" accept="image/*" multiple>
+            <div id="msg"></div>
+
+          <input type="submit" value="Submit">
+        </form>
+</div>
+
+
+  </body>
+</html>

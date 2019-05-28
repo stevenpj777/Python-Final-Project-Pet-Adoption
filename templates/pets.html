@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <title>Adoptly</title>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pets.css') }}">
+  </head>
+
+  <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        margin-top:50px;
+      }
+      .table {
+        margin-bottom: 50px;
+      }
+      a {
+        padding: 10px;
+      }
+      img {
+        width: 100px;
+        height: 100px;
+      }
+      #animals {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      #animals td {
+        font-size: 18px;
+      }
+      #animals td, #animals th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+
+      #animals tr:nth-child(even){background-color: #f2f2f2;}
+
+      #animals tr:hover {background-color: #ddd;}
+
+      #animals th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: crimson;
+        font-size: 20px;
+        color: white;
+        }
+      .links_main {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100px;
+        margin-right: 5px;
+        background-color: midnightblue;
+        padding: 0px 40px;
+        display: inline-block;
+        padding: 5px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+      }
+     .links_main:hover {
+       background-color: white;
+       color: navy;
+       border: 1px solid navy;
+     }
+     .main {
+       background-image: url('static/images/park.jpeg');
+       background-repeat: no-repeat;
+       background-size: 100% 100%;
+       height: 150px;
+       margin-bottom: -50px;
+       margin-top: -28px;
+     }
+     nav {
+       margin-top: -20px;
+     }
+     nav li {
+       display: inline-block;
+       padding: 25px 0;
+       width: 150px;
+       color: white;
+       font-size: 20px;
+     }
+
+     nav li a:active {
+       color: blue;
+     }
+
+     nav li a:hover {
+       color: yellow;
+       border-color: white;
+       font-weight: bold;
+       line-height: .1;
+     }
+     h1 {
+       font-size: 40px;
+       color: white;
+       padding-top: 20px;
+     }
+
+     /* Footer */
+
+     footer {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       /* padding: 20px; */
+       background-color: crimson;
+       /* line-height: 20px; */
+       margin-top: -50px;
+       color: white;
+     }
+
+     footer .links {
+       width: 100%;
+       max-width: 850px;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-around;
+       padding: 10px 15px;
+       border-radius: 4px;
+       color: white;
+
+     }
+
+     footer .links div {
+       width: 130px;
+     }
+
+     footer .links a {
+       display: block;
+       border-radius: 4px;
+       color: white;
+       height:10px;
+
+     }
+
+     footer a:nth-child(odd) {
+       background-color: #eeeeee;
+       color: #e52364;
+       font-weight: bold;
+     }
+
+     .copyright {
+       /* padding: 30px; */
+       font-size: 18px;
+     }
+
+  </style>
+
+  <body>
+    <nav>
+      <ul>
+        <li>Adoptly</li>
+        <li>About</li>
+        <li>Animals</li>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="/destroy_session">Logout</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <h1>All Available Animals</h1>
+      {% if session['userlevel'] ==9 %}
+      <a class="links_main"href="/add_pet">Add Pet</a>
+      {% elif session['userlevel'] == 1 %}
+      <a class="links_main"href="/add_pet">Add Pet</a>
+      {% elif session['userlevel'] == '' %}
+      <a class="links_main"href="/register">Login</a>
+      {% endif %}
+    </div>
+
+
+      <div class="container">
+        <div class="table_container">
+          <table id="animals"class="table table-bordered">
+                <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Breed</th>
+                      <th>Color</th>
+                      <th>Location</th>
+                      <th>Photo</th>
+                      <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   {% for pet in pets %}
+                       <tr>
+                           <td>{{ pet['name'] }} </td>
+                           <td>{{ pet['type'] }}</td>
+                           <td>{{ pet['breed'] }}</td>
+                           <td>{{ pet['color'] }}</td>
+                           <td>{{ pet['location'] }}</td>
+                           <td> <img src="{{ pet['file_name'] }} "></td>
+                           <td>
+                            {% if session['userlevel'] == 9 %}
+                           <a class = "links_main" href="/show_pet/{{ pet['id'] }}">Show</a><a class = "links_main" href="/edit_pet/{{ pet['id'] }}">Edit</a><a class = "links_main" href="/pets/{{ pet['id'] }}/delete">Delete</a>
+                           {% else %}
+                           <a class = "links_main" href="/show_pet/{{ pet['id'] }}">SHOW</a><a class = "links_main" href="/edit_pet/{{ pet['id'] }}">Edit</a>
+                            {% endif %}
+
+                          </td>
+                       </tr>
+                   {%endfor%}
+                </tbody>
+          </table>
+    </div>
+
+      </div>
+      <footer>
+        <div class='links'>
+          <div class='company'>
+            <a href="#">About</a>
+            <a href="#">Animals</a>
+            <a href="#">Blog</a>
+            <a href="#">Events</a>
+            <a href="#">Partners</a>
+            <a href="#">Careers</a>
+            <a href="#">Investors</a>
+            <a href="#">Ethics</a>
+            <a href="#">FAQs</a>
+            <a href="#">Contact</a>
+          </div>
+          <div class='cats'>
+            <a href="#">Active</a>
+            <a href="#">Athletic</a>
+            <a href="#">Easy Going</a>
+            <a href="#">Undemanding</a>
+            <a href="#">Light Grooming</a>
+            <a href="#">Slender</a>
+            <a href="#">Cobby</a>
+            <a href="#">Robust</a>
+            <a href="#">Foreign</a>
+            <a href="#">Semi-Foreign</a>
+          </div>
+          <div class='dogs'>
+            <a href="#">Hairless</a>
+            <a href="#">Herding</a>
+            <a href="#">Hound</a>
+            <a href="#">Hypoallergenic</a>
+            <a href="#">Detective</a>
+            <a href="#">Non-Sporting</a>
+            <a href="#">Sporting</a>
+            <a href="#">Terrier</a>
+            <a href="#">Toy</a>
+            <a href="#">Working</a>
+          </div>
+        </div>
+        <span class="copyright"> Adoptly</span>
+      </footer>
+  </body>
+</html>

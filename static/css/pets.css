@@ -1,0 +1,55 @@
+/* Universal Styles */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+.add_pet {
+  color: navy;
+}
+/* Navigation Bar */
+
+nav {
+  background-color: midnightblue;
+}
+
+nav li {
+  display: inline-block;
+  padding: 25px 0;
+  width: 150px;
+  color: white;
+  font-size: 20px;
+}
+
+nav li a:active {
+  color: blue;
+}
+
+nav li:first-child {
+  background-color: crimson;
+  width: 172px;
+  padding: 26px 0;
+  font-size: 28px;
+  text-decoration: underline;
+}
+
+nav li:last-child {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 810px) {
+  nav li:first-child {
+    width: 100%;
+  }
+
+  nav li {
+    width: 90px;
+    font-size: 16px;
+  }
+}
